@@ -9,7 +9,7 @@
   </div>
 
   <ng-template #swInp>
-    <mat-form-field style="display: inline;">
+    <mat-form-field style="display: inline-block; width: min-content;">
       <input focus matInput [(ngModel)]="appTitle" [ngModelOptions]="{standalone:true}" placeholder="Enter Title" (keydown.enter)="showTitleInput = !showTitleInput" (blur)="showTitleInput = !showTitleInput" pattern=".*[^$][^$][^$].*">
     </mat-form-field>
   </ng-template>
