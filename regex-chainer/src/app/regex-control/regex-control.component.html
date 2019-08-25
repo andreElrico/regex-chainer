@@ -1,0 +1,31 @@
+<div class="cva-container">
+
+<!--(onSelectionChange)="onChange($event)">-->
+
+    <mat-form-field class="hiddenMatSelect">
+        <mat-label>Toppings</mat-label>
+        <mat-select #ms [formControl]="flags" multiple>
+            <mat-option *ngFor="let flag of flagList" [value]="flag.f">
+              {{flag.f}} - {{flag.d}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+        
+    <mat-form-field style="width: 100%;" appearance="outline">
+
+        <span matPrefix><span class="matFixLift">/&nbsp;</span></span>
+        <input matInput placeholder="regEx pattern" [formControl]="patternC"
+              (input)="onChange($event)"
+              (blur)="onBlur($event)">
+        <span matSuffix (click)="ms.open();" style="cursor: pointer;">
+            <span class="matFixLift">
+                &nbsp;/{{flagStr}}
+            </span>
+            <span>
+                <mat-icon [ngClass]="{'disabledStyle': disabled}" style="display: inline;">outlined_flag</mat-icon>
+            </span>
+        </span>
+    </mat-form-field>
+
+</div>
+
+          

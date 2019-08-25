@@ -1,0 +1,28 @@
+.cva-container {
+  width: 100%;;
+  display: inline-block;
+  position: relative;
+}
+
+
+.hiddenMatSelect {
+  top: 0;
+  left: 50%;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+}
+
+.hiddenMatSelect,
+.hiddenMatSelect * {
+  visibility: hidden;
+}
+
+.matFixLift {
+  font-size: 1.5em;
+  color: grey;
+}
+
+.disabledStyle {
+  color:grey;
+}

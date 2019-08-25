@@ -1,0 +1,116 @@
+<h1>
+
+  <div *ngIf="!showTitleInput; else swInp"  style="display: inline;">
+    {{appTitle}}
+
+    <button mat-mini-fab color="accent" (click)="showTitleInput = !showTitleInput" matTooltip="Edit title">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
+
+  <ng-template #swInp>
+    <mat-form-field style="display: inline;">
+      <input focus matInput [(ngModel)]="appTitle" [ngModelOptions]="{standalone:true}" placeholder="Enter Title" (keydown.enter)="showTitleInput = !showTitleInput" (blur)="showTitleInput = !showTitleInput" pattern=".*[^$][^$][^$].*">
+    </mat-form-field>
+  </ng-template>
+
+  <div style = "float: right;">
+
+    <button mat-fab color="accent" (click)="onHelp();" style="margin-right: 8px;"  matTooltip="more info ...">
+      <mat-icon>help_outline</mat-icon>
+    </button>
+
+    <button mat-fab color="accent" (click)="onSave()"  matTooltip="Save current configuration">
+      <mat-icon>save</mat-icon>
+    </button>
+  </div>
+
+
+</h1>
+
+<mat-expansion-panel expanded>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      RegEx Chainer
+    </mat-panel-title>
+    <mat-panel-description>
+      Edit your regex here
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <button mat-fab color="primary" (click)="addRegSub()"  matTooltip="Add new regex">
+    <mat-icon>add</mat-icon>
+  </button>
+
+ 
+  <div style = "float: right;">
+      <button style="margin-right: 8px;" mat-fab color="accent" (click)="toggleDisableAll()"  matTooltip="Disable all">
+        <mat-icon>block</mat-icon>
+      </button>
+  </div>
+  
+  <br/><br/>
+
+  <form [formGroup]="form" >
+<!--style="display: flex; flex-wrap: wrap; align-items: center; justify-content: stretch;"-->
+      <div formArrayName="regexSub" cdkDropList class="drop-list" (cdkDropListDropped)="drop($event)" [cdkDropListDisabled]="dragListDisabled.bool">
+        <div [formGroupName]="i" *ngFor="let regSub of form.get('regexSub').controls; let i = index" class="drop-box" cdkDrag>
+
+            <app-regex-control style="flex-grow: 1; margin-right: 8px;" appearance="outline" formControlName="pattern" [stopDragging]="dragListDisabled">
+            </app-regex-control>
+
+            <mat-form-field style="flex-grow: 1; margin-right: 8px;" appearance="outline" [stopDragging]="dragListDisabled">
+              <input matInput placeholder="substitute" formControlName="sub">
+            </mat-form-field>
+
+            <div [stopDragging]="dragListDisabled">
+              <button class="disableBtn" class="rowBtn" (click)="toggleDisable(i)" mat-mini-fab  matTooltip="disable row">
+                  <mat-icon>block</mat-icon>
+              </button>
+
+              <button class="rowBtn" (click)="delRegSub(i)" mat-mini-fab color="warn"  matTooltip="delete row">
+                  X
+              </button>
+            </div>
+        </div>
+      </div>
+
+  </form>
+
+  
+
+</mat-expansion-panel>
+
+<br/><br/>
+
+<textarea placeholder="input goes in here ..." [(ngModel)]="model.input" [ngModelOptions]="{standalone: true}"></textarea>
+<button (click)="onRegexResult()" mat-raised-button color="primary" [disabled]="!model.input">Apply Regex-Chain</button>
+
+<textarea placeholder="this is empty ..." *ngIf="showResults" [(ngModel)]="model.result" [ngModelOptions]="{standalone: true}"></textarea>
+
+<!--
+  <div cdkDropList class="drop-list" (cdkDropListDropped)="drop($event)">
+      <div formArrayName="regexSub" *ngFor="let regSub of form.get('regexSub').controls; let i = index" class="drop-box" dkDrag>
+        <ng-container [formGroupName]="i">
+
+            <app-regex-control style="flex-grow: 1; margin-right: 8px;" appearance="outline" formControlName="pattern">
+            </app-regex-control>
+
+            <mat-form-field style="flex-grow: 1; margin-right: 8px;" appearance="outline">
+              <input matInput placeholder="substitute" formControlName="sub">
+            </mat-form-field>
+
+            <div>
+              <button class="disableBtn" style="margin-bottom: 20px;" (click)="toggleDisable(i);" mat-mini-fab>
+                  <mat-icon>block</mat-icon>
+              </button>
+
+              <button style="margin-bottom: 20px;" (click)="delRegSub(i)" mat-mini-fab color="warn">
+                  X
+              </button>
+            </div>
+        </ng-container>
+      </div>
+</div>
+-->
+

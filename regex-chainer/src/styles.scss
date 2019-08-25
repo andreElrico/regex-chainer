@@ -1,0 +1,85 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+body { 
+  font-family: Roboto, Arial, sans-serif;
+  margin: 0;
+}
+
+.basic-container {
+  padding: 30px;
+}
+
+.version-info {
+  font-size: 8pt;
+  float: right;
+}
+
+textarea {
+  width: 100%;
+  height: 25vh;
+  margin: 0;
+  padding: 0;
+}
+
+.rowBtn {
+  margin-bottom: 5px !important;
+}
+
+/* material styling */
+
+.drop-box div.mat-form-field-wrapper {
+  padding: 0;
+  margin: 0;
+}
+
+snack-bar-container.mat-snack-bar-container {
+  background-color: white;
+}
+
+/*   DRAG AND DROP STYLING   */
+
+.drop-list {
+  border: solid 1px #ccc;
+  display: block;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.drop-box {
+  padding: 17px 10px 17px 10px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  flex-direction: row;
+    flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.drop-box:last-child {
+  border: none;
+}
+
+.drop-list.cdk-drop-list-dragging .drop-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
