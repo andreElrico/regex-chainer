@@ -42,19 +42,19 @@
     <mat-icon>add</mat-icon>
   </button>
 
- 
+
   <div style = "float: right;">
       <button style="margin-right: 8px;" mat-fab color="accent" (click)="toggleDisableAll()"  matTooltip="Disable all">
         <mat-icon>block</mat-icon>
       </button>
   </div>
-  
+
   <br/><br/>
 
   <form [formGroup]="form" >
 <!--style="display: flex; flex-wrap: wrap; align-items: center; justify-content: stretch;"-->
       <div formArrayName="regexSub" cdkDropList class="drop-list" (cdkDropListDropped)="drop($event)" [cdkDropListDisabled]="dragListDisabled.bool">
-        <div [formGroupName]="i" *ngFor="let regSub of form.get('regexSub').controls; let i = index" class="drop-box" cdkDrag>
+        <div [formGroupName]="i" *ngFor="let regSub of controls; let i = index" class="drop-box" cdkDrag>
 
             <app-regex-control style="flex-grow: 1; margin-right: 8px;" appearance="outline" formControlName="pattern" [stopDragging]="dragListDisabled">
             </app-regex-control>
@@ -77,7 +77,7 @@
 
   </form>
 
-  
+
 
 </mat-expansion-panel>
 

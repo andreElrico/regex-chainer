@@ -25,7 +25,11 @@ export class AppComponent implements OnInit {
 
   showResults = false;
 
-  model = {};
+  model = {input: '', result: ''};
+
+  get controls() {
+    return (this.form.get('regexSub') as FormArray).controls;
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -82,13 +86,13 @@ export class AppComponent implements OnInit {
     let arr  = this.form.get('regexSub').value;
 
     arr = arr.map(el => {
-      return [new RegExp(el.pattern.p, el.pattern.f), el.sub]
+      return [new RegExp(el.pattern.p, el.pattern.f), el.sub];
     });
 
     const replacements = new Map( arr );
     let article = this.model['input'];
 
-    replacements.forEach( (value, key) => {
+    replacements.forEach( (value: string, key: RegExp) => {
       article = article.replace(key, value);
     });
 
