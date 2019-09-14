@@ -10,7 +10,7 @@
 
   <ng-template #swInp>
     <mat-form-field style="display: inline-block; width: min-content;">
-      <input focus matInput [(ngModel)]="appTitle" [ngModelOptions]="{standalone:true}" placeholder="Enter Title" (keydown.enter)="showTitleInput = !showTitleInput" (blur)="showTitleInput = !showTitleInput" pattern=".*[^$][^$][^$].*">
+      <input focus matInput [(ngModel)]="appTitle" [ngModelOptions]="{standalone:true}" placeholder="Enter Title" (keydown.enter)="showTitleInput = !showTitleInput" (blur)="showTitleInput = !showTitleInput" pattern=".*[^*][^*][^*].*">
     </mat-form-field>
   </ng-template>
 
@@ -28,7 +28,7 @@
 
 </h1>
 
-<mat-expansion-panel expanded>
+<mat-expansion-panel [expanded]="expanded">
   <mat-expansion-panel-header>
     <mat-panel-title>
       RegEx Chainer
@@ -54,7 +54,8 @@
   <form [formGroup]="form" >
 <!--style="display: flex; flex-wrap: wrap; align-items: center; justify-content: stretch;"-->
       <div formArrayName="regexSub" cdkDropList class="drop-list" (cdkDropListDropped)="drop($event)" [cdkDropListDisabled]="dragListDisabled.bool">
-        <div [formGroupName]="i" *ngFor="let regSub of controls; let i = index" class="drop-box" cdkDrag>
+
+        <div [formGroupName]="i" *ngFor="let regSub of controls; let i = index" class="drop-box" cdkDrag [ngStyle]="{'background-color': regSub['disabled'] ? 'lightgrey' : 'unset' }">
 
             <app-regex-control style="flex-grow: 1; margin-right: 8px;" appearance="outline" formControlName="pattern" [stopDragging]="dragListDisabled">
             </app-regex-control>

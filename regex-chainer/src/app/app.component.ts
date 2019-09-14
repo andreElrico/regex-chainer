@@ -6,7 +6,8 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { MatDialog } from '@angular/material/dialog';
 import {HelpDialogComponent} from './help-dialog/help-dialog.component';
 
-
+export const DELIM = '***';
+export const DELIM_R = '[*]{3}';
 const defaultTitle = 'My app-Title';
 
 @Component({
@@ -17,6 +18,8 @@ const defaultTitle = 'My app-Title';
 export class AppComponent implements OnInit {
 
   form: FormGroup;
+
+  expanded = true;
 
   appTitle = defaultTitle;
   showTitleInput = false;
@@ -56,19 +59,23 @@ export class AppComponent implements OnInit {
 
      if (url.includes('/#/')) {
 
+      this.expanded = false;
+
       let ans = url.replace(/^.*\/#\//, '');
 
-      const title = ans.replace(/^(.*)[$]{3}.*$/, '$1');
+      const title = ans.replace(new RegExp(`^(.*)${DELIM_R}.*$`), '$1');
 
       if (title) {
         this.appTitle = title;
       }
 
-      ans = ans.replace(/^.*[$]{3}/, '');
+      ans = ans.replace(new RegExp(`^.*${DELIM_R}`), '');
 
       ans = decodeURIComponent(ans);
 
       ans = JSON.parse(ans);
+
+
 
       const regexSub = this.form.controls.regexSub as FormArray;
 
@@ -118,11 +125,11 @@ export class AppComponent implements OnInit {
 
     let ans = JSON.stringify(obj); //.replace(/\s/gm, '');
 
-    const url = window.location.href.replace(/(?<=\/)#\/.*$/, '')
+    const url = window.location.href.replace(/#\/.*$/, '/');
 
     const title = this.appTitle === defaultTitle ? '' : this.appTitle;
 
-    ans = url + '#/' + title + '$$$' + ans;
+    ans = url + '#/' + title + DELIM + ans;
 
     this._snackBar.openFromComponent(OnSaveSnackBar, { data: ans });
   }
@@ -189,7 +196,7 @@ export class StopDraggingDirective
     @HostListener('touchstart', ['$event'])
     public disable(event: any): void
     {
-        this.stopDragging.bool = true
+        this.stopDragging.bool = true;
     }
 
     @HostListener('mouseleave', ['$event'])

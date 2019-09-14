@@ -1,6 +1,6 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
-body { 
+body {
   font-family: Roboto, Arial, sans-serif;
   margin: 0;
 }
@@ -82,4 +82,8 @@ snack-bar-container.mat-snack-bar-container {
 
 .drop-list.cdk-drop-list-dragging .drop-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+mat-dialog-container.mat-dialog-container {
+  height: 90vh;
 }
